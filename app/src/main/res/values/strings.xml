@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name" translatable="false">Xchange</string>
+    <string name="text_home">Home</string>
+    <string name="text_currencies">Currencies</string>
+    <string name="text_calculator">Calculator</string>
+    <string name="text_change_language">Change language</string>
+    <string name="text_history_of_currency_changes">History of currency changes</string>
+    <string name="text_selling">Selling</string>
+    <string name="text_buying">Buying</string>
+    <string name="text_currency_image">Currency Image</string>
+    <string name="text_edit_text_for_top_currency_price" translatable="false">Edit text for top currency price</string>
+    <string name="text_00_00" translatable="false">00.00</string>
+    <string name="text_search">Text search\n</string>
+    <string name="text_search_hint">Search here…</string>
+    <string name="text_result_will_be_here">Result…</string>
+    <string name="text_uzbek">Uzbek</string>
+    <string name="text_english">English</string>
+    <string name="text_russian">Russian</string>
+    <string name="language">Language</string>
+</resources>

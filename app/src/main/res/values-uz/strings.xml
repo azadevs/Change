@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_home">Bosh oyna</string>
+    <string name="text_currencies">Barcha valyutalar</string>
+    <string name="text_calculator">Kalkulyator</string>
+    <string name="text_change_language">Tilni o\'\zgartirish</string>
+    <string name="text_history_of_currency_changes">Valyutalar o\'\zgarish tarixi </string>
+    <string name="text_selling">Sotilishi</string>
+    <string name="text_buying">Olinishi</string>
+    <string name="text_currency_image">Valyuta rasmi</string>
+    <string name="text_search">tekst izlash\n</string>
+    <string name="text_search_hint">Izlash…</string>
+    <string name="text_result_will_be_here">Natija…</string>
+    <string name="text_uzbek">O\'\zbek</string>
+    <string name="text_english">Ingliz</string>
+    <string name="text_russian">Rus</string>
+    <string name="language">Language</string>
+</resources>

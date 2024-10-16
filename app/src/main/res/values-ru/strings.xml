@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_home">Дом</string>
+    <string name="text_currencies">Курсы</string>
+    <string name="text_calculator">Калькулятор</string>
+    <string name="text_change_language">Сменить язык</string>
+    <string name="text_history_of_currency_changes">История валютных изменений</string>
+    <string name="text_selling">Продажа</string>
+    <string name="text_buying">Покупка</string>
+    <string name="text_currency_image">Валюта изображение</string>
+    <string name="text_search">Текст поиска \n</string>
+    <string name="text_search_hint">Поиск здесь…</string>
+    <string name="text_result_will_be_here">Результат…</string>
+    <string name="text_uzbek">Узбексийский</string>
+    <string name="text_english">Английский</string>
+    <string name="text_russian">Русский</string>
+    <string name="language">Язык</string>
+</resources>

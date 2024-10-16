@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="ToolbarTitleTextAppearance" parent="Widget.Material3.Toolbar">
+        <item name="fontFamily">@font/sfpro_display_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CircleShapeableImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Xchange.Theme.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_currency</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.Xchange</item>
+    </style>
+
+    <style name="LanguageButton">
+        <item name="android:fontFamily">@font/sfpro_display_medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
+        <item name="android:textColor">@color/selector_radiobutton_text</item>
+        <item name="android:layout_marginVertical" tools:targetApi="o">6dp</item>
+        <item name="android:background">@drawable/selector_radiobutton_background</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/cut_corners_background</item>
+    </style>
+
+</resources>

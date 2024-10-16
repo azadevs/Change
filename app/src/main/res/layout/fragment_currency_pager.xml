@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/ivCurrencyImage"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSellingLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sfpro_display_medium"
+        android:text="@string/text_selling"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/tvSellingPrice"
+        app:layout_constraintEnd_toStartOf="@id/tvBuyingLabel"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSellingPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sfpro_display_bold"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvSellingLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivCurrencyImage"
+        app:layout_constraintVertical_bias="1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvBuyingLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/sfpro_display_medium"
+        android:text="@string/text_buying"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSellingLabel"
+        app:layout_constraintTop_toTopOf="@id/tvSellingLabel" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvBuyingPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sfpro_display_bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@id/tvBuyingLabel"
+        app:layout_constraintStart_toStartOf="@id/tvBuyingLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvBuyingLabel" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCurrencyUpdatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sfpro_display_medium"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCurrencyImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toEndOf="@id/ivCurrencyImage"
+        app:layout_constraintTop_toTopOf="@id/ivCurrencyImage"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
