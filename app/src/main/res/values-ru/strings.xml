@@ -15,4 +15,8 @@
     <string name="text_english">Английский</string>
     <string name="text_russian">Русский</string>
     <string name="language">Язык</string>
+    <string name="text_no_internet">Интернет не подключен. Проверьте подключение к интернету.</string>
+    <string name="text_unknown_error">Неизвестная ошибка</string>
+    <string name="text_n_a">Н/А</string>
+    <string name="text_invalid_amount">Инвалидная сумма</string>
 </resources>

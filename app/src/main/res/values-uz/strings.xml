@@ -15,4 +15,8 @@
     <string name="text_english">Ingliz</string>
     <string name="text_russian">Rus</string>
     <string name="language">Language</string>
+    <string name="text_no_internet">Sizda internet yo\'\q. Iltimos, tekshirib qayta urinib ko\'\ring.</string>
+    <string name="text_unknown_error">Noma\'\m xatolik yuz berdi</string>
+    <string name="text_n_a">N/A</string>
+    <string name="text_invalid_amount">Notog\'\ri miqdor kiritdingiz</string>
 </resources>

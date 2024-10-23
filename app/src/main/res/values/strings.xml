@@ -17,4 +17,8 @@
     <string name="text_english">English</string>
     <string name="text_russian">Russian</string>
     <string name="language">Language</string>
+    <string name="text_no_internet">No Internet Connection. Please check your internet connection.</string>
+    <string name="text_unknown_error">Unknown error</string>
+    <string name="text_n_a">N/A</string>
+    <string name="text_invalid_amount">Invalid amount</string>
 </resources>
