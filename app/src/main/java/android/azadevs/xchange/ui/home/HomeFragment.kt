@@ -165,16 +165,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             DialogLanguageBinding.inflate(LayoutInflater.from(requireContext()), null, false)
         selectedLanguageBackground(dialogBinding)
         builder.setView(dialogBinding.root)
-        builder.setCanceledOnTouchOutside(false)
         dialogBinding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val language = when (checkedId) {
-                R.id.rbEnglish -> {
-                    LANGUAGE_ENGLISH
-                }
-
+                R.id.rbEnglish -> LANGUAGE_ENGLISH
                 R.id.rbRussian -> LANGUAGE_RUSSIAN
                 R.id.rbUzbek -> LANGUAGE_UZBEK
-                else -> ""
+                else -> LANGUAGE_ENGLISH
             }
             if (language != currentLocale) {
                 LocaleHelper.setLocale(binding.root.context, language)
