@@ -52,6 +52,7 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                 }
+
                 is Resource.Success -> {
                     UiState.Success(result.data.map { it.toCurrencyDisplayItem() })
                 }
@@ -66,16 +67,16 @@ class HomeViewModel @Inject constructor(
             initialValue = UiState.Loading
         )
 
-    fun getCurrencyWithDates(code: String?) {
+    fun getCurrencyWithDates(code: String) {
         _currencyWithDates.value = UiState.Loading
         viewModelScope.launch {
-            getCurrencyWithDatesUseCase(code ?: "")
+            getCurrencyWithDatesUseCase(code)
                 .catch {
                     _currencyWithDates.value = UiState.Error(it.message ?: "Unknown error")
                 }
-                .map {
+                .collect {
                     if (it.isEmpty()) {
-                        _currencyWithDates.value = UiState.Error("No data found")
+                        _currencyWithDates.value = UiState.Empty
                     } else {
                         _currencyWithDates.value = UiState.Success(
                             it.map { currency ->

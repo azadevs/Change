@@ -120,7 +120,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val adapter = CurrencyHistoryAdapter()
         adapter.submitList(data)
         binding.rvCurrenciesHistory.adapter = adapter
-        binding.rvCurrenciesHistory.setHasFixedSize(true)
     }
 
     private fun configureViewPagerWithTabs(codes: List<String>) {

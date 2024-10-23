@@ -3,8 +3,6 @@ package android.azadevs.xchange.data.repository
 import android.azadevs.xchange.core.mappers.toCurrencyDateList
 import android.azadevs.xchange.core.mappers.toCurrencyEntityList
 import android.azadevs.xchange.core.mappers.toCurrencyList
-import android.azadevs.xchange.core.utils.Error
-import android.azadevs.xchange.core.utils.Resource
 import android.azadevs.xchange.core.utils.XchangeUtilities.isNetworkAvailable
 import android.azadevs.xchange.data.datasource.LocalDataSource
 import android.azadevs.xchange.data.remote.service.ExchangeServiceApi
@@ -20,8 +18,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import javax.inject.Inject
 
 /**
@@ -49,31 +45,6 @@ class ProdMainRepository @Inject constructor(
             cacheCurrencies()
         }
     }
-
-//    override suspend fun getCurrencies(): Resource<List<Currency>, Error> =
-//        withContext(Dispatchers.IO) {
-//            try {
-//                if (!context.isNetworkAvailable()) {
-//                    if (localSource.getCurrencies().isEmpty()) {
-//                        Resource.Error(Error.NoInternet)
-//                    } else {
-//                        Resource.Success(localSource.getCurrencies().toCurrencyList())
-//                    }
-//                } else {
-//                    Resource.Success(cacheCurrencies())
-//                }
-//            } catch (e: Exception) {
-//                when (e) {
-//                    is HttpException -> Resource.Error(
-//                        Error.ServerError(
-//                            e.message ?: "Unknown server error"
-//                        )
-//                    )
-//
-//                    else -> Resource.Error(Error.Unknown(e.message ?: "Unknown error"))
-//                }
-//            }
-//        }
 
     override fun getSearchCurrencyByCode(code: String): Flow<List<Currency>> =
         localSource.getSearchCurrencyByCode(code)
