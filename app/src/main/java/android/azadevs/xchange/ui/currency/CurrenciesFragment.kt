@@ -5,6 +5,7 @@ import android.azadevs.xchange.databinding.FragmentCurrenciesBinding
 import android.azadevs.xchange.ui.currency.adapter.CurrencyAdapter
 import android.azadevs.xchange.ui.currency.viewmodel.CurrenciesViewModel
 import android.azadevs.xchange.ui.utils.UiState
+import android.azadevs.xchange.ui.utils.asString
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -62,7 +63,7 @@ class CurrenciesFragment : Fragment(R.layout.fragment_currencies) {
             .onEach { state ->
                 when (state) {
                     is UiState.Error -> {
-                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, state.message.asString(requireContext()), Snackbar.LENGTH_LONG).show()
                         binding.progressBar.visibility = View.INVISIBLE
                     }
 

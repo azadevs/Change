@@ -1,5 +1,6 @@
 package android.azadevs.xchange.ui.home.viewmodel
 
+import android.azadevs.xchange.R
 import android.azadevs.xchange.core.mappers.toCurrencyDisplayItem
 import android.azadevs.xchange.core.mappers.toHistoryItem
 import android.azadevs.xchange.core.utils.Error
@@ -7,6 +8,7 @@ import android.azadevs.xchange.core.utils.Resource
 import android.azadevs.xchange.domain.usecase.GetCurrenciesUseCase
 import android.azadevs.xchange.domain.usecase.GetCurrencyWithDatesUseCase
 import android.azadevs.xchange.ui.model.CurrencyHistoryItem
+import android.azadevs.xchange.ui.utils.UIText
 import android.azadevs.xchange.ui.utils.UiState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -40,15 +42,15 @@ class HomeViewModel @Inject constructor(
                 is Resource.Error -> {
                     when (result.error) {
                         Error.NoInternet -> {
-                            UiState.Error("No Internet Connection. Please check your internet connection.")
+                            UiState.Error(UIText.ResourceText(R.string.text_no_internet))
                         }
 
                         is Error.ServerError -> {
-                            UiState.Error(result.error.errorMessage)
+                            UiState.Error(UIText.DynamicText(result.error.errorMessage))
                         }
 
                         is Error.Unknown -> {
-                            UiState.Error(result.error.errorMessage)
+                            UiState.Error(UIText.DynamicText(result.error.errorMessage))
                         }
                     }
                 }
@@ -59,7 +61,15 @@ class HomeViewModel @Inject constructor(
             }
         }
         .catch {
-            emit(UiState.Error(it.message ?: "Unknown error"))
+            emit(
+                UiState.Error(
+                    if (it.message != null) {
+                        UIText.DynamicText(it.message!!)
+                    } else {
+                        UIText.ResourceText(R.string.text_unknown_error)
+                    }
+                )
+            )
         }
         .stateIn(
             scope = viewModelScope,
@@ -72,7 +82,13 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getCurrencyWithDatesUseCase(code)
                 .catch {
-                    _currencyWithDates.value = UiState.Error(it.message ?: "Unknown error")
+                    _currencyWithDates.value = UiState.Error(
+                        if (it.message != null) {
+                            UIText.DynamicText(it.message!!)
+                        } else {
+                            UIText.ResourceText(R.string.text_unknown_error)
+                        }
+                    )
                 }
                 .collect {
                     if (it.isEmpty()) {

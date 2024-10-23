@@ -13,6 +13,7 @@ import android.azadevs.xchange.ui.utils.Constants.LANGUAGE_ENGLISH
 import android.azadevs.xchange.ui.utils.Constants.LANGUAGE_RUSSIAN
 import android.azadevs.xchange.ui.utils.Constants.LANGUAGE_UZBEK
 import android.azadevs.xchange.ui.utils.UiState
+import android.azadevs.xchange.ui.utils.asString
 import android.azadevs.xchange.ui.utils.getCurrencyCodes
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -67,7 +68,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             .onEach { state ->
                 when (state) {
                     is UiState.Error -> {
-                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(
+                            binding.root,
+                            state.message.asString(requireContext()),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                         binding.frameLoading.visibility = View.INVISIBLE
                     }
 
@@ -96,7 +101,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 when (state) {
                     is UiState.Error -> {
                         binding.historyProgressBar.visibility = View.INVISIBLE
-                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(
+                            binding.root,
+                            state.message.asString(requireContext()),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
 
                     UiState.Loading -> {

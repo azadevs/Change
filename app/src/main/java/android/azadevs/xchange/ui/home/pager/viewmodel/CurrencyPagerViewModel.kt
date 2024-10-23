@@ -1,11 +1,13 @@
 package android.azadevs.xchange.ui.home.pager.viewmodel
 
+import android.azadevs.xchange.R
 import android.azadevs.xchange.core.mappers.toCurrencyDisplayItem
 import android.azadevs.xchange.core.utils.Error
 import android.azadevs.xchange.core.utils.Resource
 import android.azadevs.xchange.domain.usecase.GetCurrencyByCodeUseCase
 import android.azadevs.xchange.ui.model.CurrencyDisplayItem
 import android.azadevs.xchange.ui.utils.Constants.ARG_CURRENCY_CODE
+import android.azadevs.xchange.ui.utils.UIText
 import android.azadevs.xchange.ui.utils.UiState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -29,21 +31,21 @@ class CurrencyPagerViewModel @Inject constructor(
 ) : ViewModel() {
 
     val currentCurrencyFlow: StateFlow<UiState<CurrencyDisplayItem>> =
-        getCurrencyByCode(stateHandle[ARG_CURRENCY_CODE] ?: "null")
+        getCurrencyByCode(stateHandle[ARG_CURRENCY_CODE]!!)
             .map { result ->
                 when (result) {
                     is Resource.Error -> {
                         when (result.error) {
                             Error.NoInternet -> {
-                                UiState.Error("No internet connection")
+                                UiState.Error(UIText.ResourceText(R.string.text_no_internet))
                             }
 
                             is Error.ServerError -> {
-                                UiState.Error(result.error.errorMessage)
+                                UiState.Error(UIText.DynamicText(result.error.errorMessage))
                             }
 
                             is Error.Unknown -> {
-                                UiState.Error(result.error.errorMessage)
+                                UiState.Error(UIText.DynamicText(result.error.errorMessage))
                             }
                         }
                     }
@@ -55,7 +57,15 @@ class CurrencyPagerViewModel @Inject constructor(
 
             }
             .catch {
-                emit(UiState.Error(it.message ?: "Unknown error"))
+                emit(
+                    UiState.Error(
+                        if (it.message != null) {
+                            UIText.DynamicText(it.message!!)
+                        } else {
+                            UIText.ResourceText(R.string.text_unknown_error)
+                        }
+                    )
+                )
             }
             .stateIn(
                 scope = viewModelScope,

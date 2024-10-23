@@ -1,11 +1,13 @@
 package android.azadevs.xchange.ui.currency.viewmodel
 
+import android.azadevs.xchange.R
 import android.azadevs.xchange.core.mappers.toCurrencyDisplayItem
 import android.azadevs.xchange.core.mappers.toCurrencyDisplayItemList
 import android.azadevs.xchange.core.utils.Error
 import android.azadevs.xchange.core.utils.Resource
 import android.azadevs.xchange.domain.usecase.GetCurrenciesUseCase
 import android.azadevs.xchange.domain.usecase.GetSearchCurrencyByCodeUseCase
+import android.azadevs.xchange.ui.utils.UIText
 import android.azadevs.xchange.ui.utils.UiState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -37,15 +39,15 @@ class CurrenciesViewModel @Inject constructor(
             is Resource.Error -> {
                 when (result.error) {
                     Error.NoInternet -> {
-                        UiState.Error("No Internet Connection. Please check your internet connection and try again.")
+                        UiState.Error(UIText.ResourceText(R.string.text_no_internet))
                     }
 
                     is Error.ServerError -> {
-                        UiState.Error(result.error.errorMessage)
+                        UiState.Error(UIText.DynamicText(result.error.errorMessage))
                     }
 
                     is Error.Unknown -> {
-                        UiState.Error(result.error.errorMessage)
+                        UiState.Error(UIText.DynamicText(result.error.errorMessage))
                     }
                 }
             }
@@ -55,7 +57,15 @@ class CurrenciesViewModel @Inject constructor(
             }
         }
     }.catch {
-        emit(UiState.Error(it.message ?: "Unknown error"))
+        emit(
+            UiState.Error(
+                if (it.message != null) {
+                    UIText.DynamicText(it.message!!)
+                } else {
+                    UIText.ResourceText(R.string.text_unknown_error)
+                }
+            )
+        )
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),

@@ -1,9 +1,11 @@
 package android.azadevs.xchange.ui.converter.viewmodel
 
+import android.azadevs.xchange.R
 import android.azadevs.xchange.core.mappers.toCurrencyDisplayItem
 import android.azadevs.xchange.core.utils.Error
 import android.azadevs.xchange.core.utils.Resource
 import android.azadevs.xchange.domain.usecase.GetCurrenciesUseCase
+import android.azadevs.xchange.ui.utils.UIText
 import android.azadevs.xchange.ui.utils.UiState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,15 +31,15 @@ class CurrencyConverterViewModel @Inject constructor(
                 is Resource.Error -> {
                     when (state.error) {
                         Error.NoInternet -> {
-                            UiState.Error("No Internet")
+                            UiState.Error(UIText.ResourceText(R.string.text_no_internet))
                         }
 
                         is Error.ServerError -> {
-                            UiState.Error(state.error.errorMessage)
+                            UiState.Error(UIText.DynamicText(state.error.errorMessage))
                         }
 
                         is Error.Unknown -> {
-                            UiState.Error(state.error.errorMessage)
+                            UiState.Error(UIText.DynamicText(state.error.errorMessage))
                         }
 
                     }
@@ -49,7 +51,15 @@ class CurrencyConverterViewModel @Inject constructor(
             }
         }
         .catch {
-            emit(UiState.Error(it.message ?: "Unknown error"))
+            emit(
+                UiState.Error(
+                    if (it.message != null) {
+                        UIText.DynamicText(it.message!!)
+                    } else {
+                        UIText.ResourceText(R.string.text_unknown_error)
+                    }
+                )
+            )
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), UiState.Loading)
 }

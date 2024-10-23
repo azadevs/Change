@@ -7,6 +7,7 @@ import android.azadevs.xchange.ui.converter.adapter.CurrencySpinnerAdapter
 import android.azadevs.xchange.ui.converter.viewmodel.CurrencyConverterViewModel
 import android.azadevs.xchange.ui.model.CurrencyDisplayItem
 import android.azadevs.xchange.ui.utils.UiState
+import android.azadevs.xchange.ui.utils.asString
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -59,7 +60,10 @@ class CurrencyConverterFragment : Fragment(R.layout.fragment_currency_converter)
                 String.format(Locale.getDefault(), "%.2f", convertedAmount)
             } ${bottomCurrency.code}"
         } else {
-            Toast.makeText(requireContext(), "Invalid amount", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.text_invalid_amount), Toast.LENGTH_SHORT
+            ).show()
         }
 
     }
@@ -71,7 +75,11 @@ class CurrencyConverterFragment : Fragment(R.layout.fragment_currency_converter)
             .onEach { state ->
                 when (state) {
                     is UiState.Error -> {
-                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(
+                            binding.root,
+                            state.message.asString(requireContext()),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
 
                     UiState.Loading -> {}
@@ -80,6 +88,7 @@ class CurrencyConverterFragment : Fragment(R.layout.fragment_currency_converter)
                         configureTopSpinner(state.data)
                         configureBottomSpinner(state.data)
                     }
+
                     else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -102,9 +111,9 @@ class CurrencyConverterFragment : Fragment(R.layout.fragment_currency_converter)
                 ) {
                     binding.topCurrencySpinner.setSelection(position, true)
                     binding.tvBuyingPrice.text =
-                        currencies[position].nbuBuyPrice.ifEmpty { "N/A" }
+                        currencies[position].nbuBuyPrice.ifEmpty { getString(R.string.text_n_a) }
                     binding.tvSellingPrice.text =
-                        currencies[position].nbuCellPrice.ifEmpty { "N/A" }
+                        currencies[position].nbuCellPrice.ifEmpty { getString(R.string.text_n_a) }
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {}

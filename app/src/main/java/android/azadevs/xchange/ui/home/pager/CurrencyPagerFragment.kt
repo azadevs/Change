@@ -6,6 +6,7 @@ import android.azadevs.xchange.ui.home.pager.viewmodel.CurrencyPagerViewModel
 import android.azadevs.xchange.ui.model.CurrencyDisplayItem
 import android.azadevs.xchange.ui.utils.Constants.ARG_CURRENCY_CODE
 import android.azadevs.xchange.ui.utils.UiState
+import android.azadevs.xchange.ui.utils.asString
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -48,7 +49,11 @@ class CurrencyPagerFragment : Fragment(R.layout.fragment_currency_pager) {
                 when (state) {
                     is UiState.Error -> {
                         binding.progressBar.visibility = View.INVISIBLE
-                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(
+                            binding.root,
+                            state.message.asString(requireContext()),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
 
                     UiState.Loading -> {
@@ -59,6 +64,7 @@ class CurrencyPagerFragment : Fragment(R.layout.fragment_currency_pager) {
                         binding.progressBar.visibility = View.INVISIBLE
                         configureUi(state.data)
                     }
+
                     else -> {}
                 }
             }
